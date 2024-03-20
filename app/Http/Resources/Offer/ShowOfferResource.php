@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Offer;
 
+use App\Http\Resources\Branch\BranchResource;
 use App\Http\Resources\Category\CategoryResource;
 use App\Http\Resources\Market\MarketResource;
 use Illuminate\Http\Request;
@@ -27,6 +28,7 @@ class ShowOfferResource extends JsonResource
             'market_id' => new MarketResource($this->market),
             'main_image' => $this->main_image ? url('/').'/storage'.substr($this->main_image, 6) : null,
             'images' => ImageResource::collection($this->images),
+            'branches' => BranchResource::collection($this->branches)
         ];
     }
 }

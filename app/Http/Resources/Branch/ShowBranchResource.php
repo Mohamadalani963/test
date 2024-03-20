@@ -4,6 +4,7 @@ namespace App\Http\Resources\Branch;
 
 use App\Http\Resources\District\DistrictResource;
 use App\Http\Resources\Market\MarketResource;
+use App\Http\Resources\Offer\OfferResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -26,6 +27,7 @@ class ShowBranchResource extends JsonResource
             'lng' => $this->lng,
             'market' => new MarketResource($this->market),
             'district' => new DistrictResource($this->district),
+            'offers' => OfferResource::collection($this->offers)
         ];
     }
 }
