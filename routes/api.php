@@ -92,8 +92,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/{id}', 'delete')->middleware('ability:slider::delete');
     });
 
-    //TODO check eager loading
-    //TODO write proper abilities
     //TODO Filters Base on mobile Application needs
     //TODO check deleting high level entities
     //TODO unit test
