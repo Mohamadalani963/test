@@ -23,7 +23,7 @@ class OfferController extends Controller
 
     public function index(Request $request)
     {
-        return OfferResource::collection($this->offerRepo->index(query: $request->all()));
+        return OfferResource::collection($this->offerRepo->index(query: $request->all(),relations:["category","market"]));
     }
 
     public function store(CreateOfferRequest $createOfferRequest)
