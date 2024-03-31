@@ -13,9 +13,8 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        //TODO Assign Abilities
         //
-        $userAbilities = [];
+        $marektOwnerAbilities = [];
         $guestAbilities = [
             'district::index',
             'district::show',
@@ -29,6 +28,14 @@ class RoleSeeder extends Seeder
             'favorite::index',
             'favorite::store',
             'favorite::delete',
+
+            'branch::index',
+            'branch::show',
+
+            'offer::index',
+            'offer::show',
+
+            'slider::index'
         ];
 
         $admin = Role::where('name', '*')->first();
@@ -37,17 +44,11 @@ class RoleSeeder extends Seeder
         }
         $admin->abilities()->attach(Ability::pluck('id')->toArray());
 
-        $user = Role::where('name', 'branch_admin')->first();
-        if (! $user) {
-            $user = Role::create(['name' => 'branch_admin']);
-        }
-        $user->abilities()->sync(Ability::whereIn('name', $userAbilities)->pluck('id')->toArray());
-
         $user = Role::where('name', 'market_owner')->first();
         if (! $user) {
             $user = Role::create(['name' => 'market_owner']);
         }
-        $user->abilities()->sync(Ability::whereIn('name', $userAbilities)->pluck('id')->toArray());
+        $user->abilities()->sync(Ability::whereIn('name', $marektOwnerAbilities)->pluck('id')->toArray());
 
         $guest = Role::where('name', 'guest')->first();
         if (! $guest) {
