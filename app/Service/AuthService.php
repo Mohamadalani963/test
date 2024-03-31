@@ -33,7 +33,6 @@ class AuthService
         return [
             'token' => $token->plainTextToken,
             'user' => $user,
-            'abilities' => $abilities_name,
         ];
     }
 
