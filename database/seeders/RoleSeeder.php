@@ -35,7 +35,9 @@ class RoleSeeder extends Seeder
             'offer::index',
             'offer::show',
 
-            'slider::index'
+            'slider::index',
+            'supportMessage::store',
+
         ];
 
         $admin = Role::where('name', '*')->first();

@@ -55,6 +55,10 @@ class AbilitySeeder extends Seeder
             'slider::store',
             'slider::delete',
 
+            'supportMessage::index',
+            'supportMessage::store',
+            'supportMessage::update',
+            'supportMessage::delete'
         ];
 
         foreach ($abilities as $newAbility) {
