@@ -21,7 +21,7 @@ class SupportMessageController extends Controller
     public function index(Request $request)
     {
         //
-        return SupportMessageResource::collection($this->supportMessageRepo->index($request->all(),true,['user']));
+        return SupportMessageResource::collection($this->supportMessageRepo->index($request->all(),true,['user']))->additional(['status' => 'success']);
 
     }
 

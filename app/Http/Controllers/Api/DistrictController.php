@@ -21,7 +21,7 @@ class DistrictController extends Controller
 
     public function index(Request $request)
     {
-        return DistrictResource::collection($this->districtRepo->index(query: $request->all()));
+        return DistrictResource::collection($this->districtRepo->index(query: $request->all()))->additional(['status' => 'success']);
     }
 
     public function store(CreateDistrictRequest $createDistrictRequest)

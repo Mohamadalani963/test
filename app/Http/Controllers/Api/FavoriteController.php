@@ -22,7 +22,7 @@ class FavoriteController extends Controller
 
     public function index(Request $request)
     {
-        return FavoriteResource::collection($this->favoriteRepo->index(query: $request->all(), relations: ['user', 'market']));
+        return FavoriteResource::collection($this->favoriteRepo->index(query: $request->all(), relations: ['user', 'market']))->additional(['status' => 'success']);
     }
 
     public function store(CreateFavoriteRequest $createFavoriteRequest)

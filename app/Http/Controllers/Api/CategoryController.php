@@ -21,7 +21,7 @@ class CategoryController extends Controller
 
     public function index(Request $request)
     {
-        return CategoryResource::collection($this->categoryRepo->index(query: $request->all()));
+        return CategoryResource::collection($this->categoryRepo->index(query: $request->all()))->additional(['status' => 'success']);
     }
 
     public function store(CreateCategoryRequest $createCategoryRequest)

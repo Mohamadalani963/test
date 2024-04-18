@@ -21,7 +21,7 @@ class MarketController extends Controller
 
     public function index(Request $request)
     {
-        return MarketResource::collection($this->marketRepo->index(query: $request->all()));
+        return MarketResource::collection($this->marketRepo->index(query: $request->all()))->additional(['status' => 'success']);
     }
 
     public function store(CreateMarketRequest $createMarketRequest)

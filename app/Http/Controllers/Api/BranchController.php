@@ -21,7 +21,7 @@ class BranchController extends Controller
 
     public function index(Request $request)
     {
-        return BranchResource::collection($this->branchRepo->index(query: $request->all()));
+        return BranchResource::collection($this->branchRepo->index(query: $request->all()))->additional(['status' => 'success']);
     }
 
     public function store(CreateBranchRequest $createBranchRequest)
