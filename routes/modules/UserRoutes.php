@@ -1,0 +1,16 @@
+<?php
+
+namespace Routes\APIs\UserRoutes;
+
+use App\Http\Controllers\Api\UserController\SupportMessageController;
+use Illuminate\Support\Facades\Route;
+
+
+//TODO Add middleware here
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::prefix('supportMessage')->controller(SupportMessageController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::put('/{id}', 'index');
+        Route::delete('/{id}', 'delete');
+    });
+});
