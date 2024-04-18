@@ -36,6 +36,6 @@ class UserController extends Controller
 
     public function show()
     {
-        return new UserResource(Auth::user());
+        return ['data'=>new UserResource(Auth::user()),'status'=>'success'];
     }
 }

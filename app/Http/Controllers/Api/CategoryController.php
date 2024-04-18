@@ -41,7 +41,7 @@ class CategoryController extends Controller
 
     public function show($id)
     {
-        return new ShowCategoryResource($this->categoryRepo->show($id));
+        return ['data'=>new ShowCategoryResource($this->categoryRepo->show($id)),'status'=>'success'];
     }
 
     public function delete($id)

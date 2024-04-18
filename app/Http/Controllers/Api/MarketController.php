@@ -45,7 +45,7 @@ class MarketController extends Controller
 
     public function show($id)
     {
-        return new ShowMarketResource($this->marketRepo->show($id));
+        return ['data'=>new ShowMarketResource($this->marketRepo->show($id)),'status'=>'success'];
     }
 
     public function delete($id)

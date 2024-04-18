@@ -38,7 +38,7 @@ class DistrictController extends Controller
 
     public function show($id)
     {
-        return new ShowDistrictResource($this->districtRepo->show($id));
+        return ['data'=>new ShowDistrictResource($this->districtRepo->show($id)),'status'=>'success'];
     }
 
     public function delete($id)

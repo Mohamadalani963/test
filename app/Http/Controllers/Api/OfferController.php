@@ -43,7 +43,7 @@ class OfferController extends Controller
 
     public function show($id)
     {
-        return new ShowOfferResource($this->offerRepo->show($id));
+        return ['data'=>new ShowOfferResource($this->offerRepo->show($id)),'status'=>'success'];
     }
 
     public function delete($id)

@@ -45,7 +45,7 @@ class BranchController extends Controller
 
     public function show($id)
     {
-        return new ShowBranchResource($this->branchRepo->show($id));
+        return ['data' => new ShowBranchResource($this->branchRepo->show($id)),'status'=>'success'];
     }
 
     public function delete($id)
