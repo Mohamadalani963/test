@@ -10,4 +10,10 @@ class DeviceRepo extends CrudRepository
     {
         parent::__construct(Device::class);
     }
+    protected $filters = [
+        'token_id' => 'equal'
+    ];
+    public function updateBulk($data,$devices){
+        Device::whereIn('id',$devices)->update($data);
+    }
 }
