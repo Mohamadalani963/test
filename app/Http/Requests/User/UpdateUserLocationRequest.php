@@ -23,8 +23,9 @@ class UpdateUserLocationRequest extends FormRequest
     {
         return [
             //
-            'lat' => 'sometimes|decimal:2',
-            'lng' => 'sometimes|decimal:2',
+            'lat' => 'required_without:district_id|decimal:2',
+            'lng' => 'required_without:district_id|decimal:2',
+            'district_id' => 'required_without:lat|exists:districts,id'
         ];
     }
 }
