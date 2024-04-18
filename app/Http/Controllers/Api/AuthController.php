@@ -26,7 +26,7 @@ class AuthController extends Controller
         $response = $this->service->register($data);
         $response['user'] = new UserResource($response['user']);
 
-        return $this->success($response);
+        return $this->success(["data"=>$response]);
     }
 
     public function login(LoginRequest $request)
