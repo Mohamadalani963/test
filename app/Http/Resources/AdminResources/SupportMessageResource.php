@@ -22,6 +22,7 @@ class SupportMessageResource extends JsonResource
             'user' => new UserResource($this->user),
             'contact_email' => $this->contact_email,
             'file' => $this->file ? url('/').'/storage'.substr($this->file, 6) : null,
+            'status' => $this->status
         ];
     }
 }

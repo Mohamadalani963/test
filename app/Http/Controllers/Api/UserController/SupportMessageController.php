@@ -16,7 +16,7 @@ class SupportMessageController extends Controller
     {
         $this->supportMessageRepo = $supportMessageRepo;
     }
-    public function create(CreateSupportMessageRequest $createSupportMessageRequest){
+    public function store(CreateSupportMessageRequest $createSupportMessageRequest){
         $data=  $createSupportMessageRequest->validated();
         $data['user_id'] = Auth::user()->id;
         return new SupportMessageResource($this->supportMessageRepo->store($data));
