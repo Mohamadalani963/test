@@ -37,7 +37,8 @@ class RoleSeeder extends Seeder
 
             'slider::index',
             'supportMessage::store',
-            'contactUs::store'
+            'contactUs::store',
+            'param::index'
 
         ];
 

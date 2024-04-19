@@ -63,7 +63,12 @@ class AbilitySeeder extends Seeder
             'contactUs::index',
             'contactUs::store',
             'contactUs::update',
-            'contactUs::delete'
+            'contactUs::delete',
+
+            'param::index',
+            'param::store',
+            'param::update',
+            'param::delete'
         ];
 
         foreach ($abilities as $newAbility) {
