@@ -107,6 +107,10 @@ class ParamSeeder extends Seeder
         [
             'name' => 'big_about_us_cn',
             'value' => '',
+        ],
+        [
+            'name' => 'remaining_days_notifier',
+            'value' => 1
         ]
         ];
         foreach($params as $param){
