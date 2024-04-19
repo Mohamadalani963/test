@@ -24,8 +24,7 @@ class AuthController extends Controller
         $data['type'] = 'guest';
         $data['ip'] = $request->ip();
         $response = $this->service->register($data);
-        $response['user'] = new UserResource($response['user']);
-
+        unset($response['user']);
         return $this->success(["data"=>$response]);
     }
 
