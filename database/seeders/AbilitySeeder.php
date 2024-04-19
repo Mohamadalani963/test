@@ -58,7 +58,12 @@ class AbilitySeeder extends Seeder
             'supportMessage::index',
             'supportMessage::store',
             'supportMessage::update',
-            'supportMessage::delete'
+            'supportMessage::delete',
+
+            'contactUs::index',
+            'contactUs::store',
+            'contactUs::update',
+            'contactUs::delete'
         ];
 
         foreach ($abilities as $newAbility) {
