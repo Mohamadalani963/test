@@ -15,7 +15,16 @@ class ParamController extends Controller
     {
         $this->paramRepo = $paramRepo;
     }
-    public function index(Request $request){
-        return ParamResource::collection($this->paramRepo->index($request->all(),false))->additional(['status'=>'success']);
+    public function index(Request $request)
+    {
+        $params = $this->paramRepo->index($request->all(), false)->toArray();
+
+        $data = collect($params)->pluck('value', 'name')->toArray();
+
+        $response = [
+            "data" => $data
+        ];
+
+        return $this->success($response);
     }
 }

@@ -15,8 +15,7 @@ class ParamResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'name' => $this->name,
-            'value' => $this->value
+            $this->name => $this->value
         ];
     }
 }
