@@ -70,4 +70,14 @@ class OfferRepo extends CrudRepository
         $offer = $this->findOrFail($id);
         $offer->branches()->detach($data['branches']);
     }
+    //TODO next step filters
+    // $latitude = 37.7749; // Example latitude
+    // $longitude = -122.4194; // Example longitude
+    // $radius = 10; // Search radius in kilometers
+    //
+    // $offers = Offer::select('id', 'latitude', 'longitude')
+    // ->selectRaw('(6371 * acos(cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude)))) AS distance', [$latitude, $longitude, $latitude])
+    // ->having('distance', '<', $radius)
+    // ->orderBy('distance')
+    // ->get();
 }

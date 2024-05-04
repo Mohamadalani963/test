@@ -48,4 +48,8 @@ class Offer extends Model
     {
         return $this->belongsToMany(Branch::class, 'branch_offers');
     }
+    public function ShoppingList()
+    {
+        return $this->hasMany(ShoppingList::class);
+    }
 }
