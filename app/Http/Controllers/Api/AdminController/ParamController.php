@@ -17,20 +17,43 @@ class ParamController extends Controller
     {
         $this->paramRepo = $paramRepo;
     }
-    public function index(Request $request){
-        return ParamResource::collection($this->paramRepo->index($request->all(),false))->additional(['status'=>'success']);
+    public function index(Request $request)
+    {
+        $params = $this->paramRepo->index($request->all(), false);
+        $data = [];
+        foreach ($params as $param) {
+            $value = $param->value;
+            $type = $param->type;
+            switch ($type) {
+                case "integer":
+                    $value = intval($value);
+                    break;
+                case "bool":
+                    $value = boolval($value);
+                    break;
+                default:
+            }
+            $data[$param->name] = $value;
+        }
+        $response = [
+            "data" => $data
+        ];
+        return $this->success($response);
     }
-    public function store(CreateParamRequest $createParamRequest){
+    public function store(CreateParamRequest $createParamRequest)
+    {
         $data = $createParamRequest->validated();
         $this->paramRepo->store($data);
         return $this->success();
     }
-    public function update($id,UpdateParamRequest $updateParamRequest){
-        $data=  $updateParamRequest->validated();
-        $this->paramRepo->update($id,$data);
+    public function update($id, UpdateParamRequest $updateParamRequest)
+    {
+        $data =  $updateParamRequest->validated();
+        $this->paramRepo->update($id, $data);
         return $this->success();
     }
-    public function delete($id){
+    public function delete($id)
+    {
         $this->paramRepo->delete($id);
         return $this->success();
     }

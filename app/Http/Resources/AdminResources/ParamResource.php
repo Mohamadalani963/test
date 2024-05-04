@@ -12,12 +12,21 @@ class ParamResource extends JsonResource
      *
      * @return array<string, mixed>
      */
-    public function toArray(Request $request): array
+    public function toArray($request): array
     {
+        $value = $this->value;
+        $type = $this->type;
+        switch ($type) {
+            case "integer":
+                $value = intval($value);
+                break;
+            case "bool":
+                $value = boolval($value);
+                break;
+            default:
+        }
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'value' => $this->value
+            $this->name => $value
         ];
     }
 }

@@ -17,10 +17,23 @@ class ParamController extends Controller
     }
     public function index(Request $request)
     {
-        $params = $this->paramRepo->index($request->all(), false)->toArray();
-
-        $data = collect($params)->pluck('value', 'name')->toArray();
-
+        $params = $this->paramRepo->index($request->all(), false);
+        $data = [];
+        foreach ($params as $param) {
+            $value = $param->value;
+            $type = $param->type;
+            switch ($type) {
+                case "integer":
+                    $value = intval($value);
+                    break;
+                case "bool":
+                    $value = boolval($value);
+                    break;
+                default:
+                    $value = $param->value;
+            }
+            $data[$param->name] = $value;
+        }
         $response = [
             "data" => $data
         ];

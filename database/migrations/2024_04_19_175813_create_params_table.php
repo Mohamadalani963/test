@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('value');
-            $table->enum('type', ['integer', 'string', 'bool']);
+            $table->enum('type', ['integer', 'string', 'bool'])->default('string');
             $table->timestamps();
         });
     }
