@@ -25,6 +25,7 @@ class CreateParamRequest extends FormRequest
             //
             'name' => 'required|string|unique:params,name',
             'value' => 'required|string',
+            'type' => 'required|in:integer,string,bool'
         ];
     }
 }
