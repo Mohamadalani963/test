@@ -12,6 +12,7 @@ class DistrictRepo extends CrudRepository
     }
 
     protected $filters = [
+        'name' => 'like',
         'city' => 'equal',
         'status' => 'equal',
     ];
