@@ -31,4 +31,8 @@ class Market extends Model
             }
         });
     }
+    public function branch()
+    {
+        return $this->hasMany(Branch::class);
+    }
 }

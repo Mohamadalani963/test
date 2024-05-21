@@ -3,6 +3,7 @@
 namespace App\Http\Requests\UserRequests\ShoppingListRequest;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class CreateShoppingListRequest extends FormRequest
 {
@@ -21,10 +22,10 @@ class CreateShoppingListRequest extends FormRequest
      */
     public function rules(): array
     {
+        $user = Auth::user();
         return [
             //
-            'user_id' => 'required|exists:users,id',
-            'offer_id' => 'required|exists:offers,id'
+            'offer_id' => "required|exists:offers,id|unique:shopping_lists,offer_id,NULL,id,user_id,{$user->id}"
         ];
     }
 }

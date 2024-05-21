@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
 include(__DIR__ . '/modules/AdminRoutes.php');
 include(__DIR__ . '/modules/UserRoutes.php');
 
@@ -60,12 +61,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/{id}', 'update')->middleware('ability:market::update');
         Route::delete('/{id}', 'delete')->middleware('ability:market::delete');
         Route::post('/', 'store')->middleware('ability:market::store');
-    });
-    Route::prefix('favorite')->controller(FavoriteController::class)->group(function () {
-        //TODO Test this
-        Route::get('/', 'index')->middleware('ability:favorite::index');
-        Route::post('/', 'store')->middleware('abiltiy:favorite::store');
-        Route::delete('/{product_id}', 'delete')->middleware('abiltiy:favorite::delete');
     });
     Route::prefix('branch')->controller(BranchController::class)->group(function () {
         Route::get('/', 'index')->middleware('ability:branch::index');

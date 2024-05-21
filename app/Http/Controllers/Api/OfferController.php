@@ -11,6 +11,7 @@ use App\Http\Resources\Offer\OfferResource;
 use App\Http\Resources\Offer\ShowOfferResource;
 use App\Repos\OfferRepo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OfferController extends Controller
 {
@@ -23,7 +24,14 @@ class OfferController extends Controller
 
     public function index(Request $request)
     {
-        return OfferResource::collection($this->offerRepo->index(query: $request->all(),relations:["category","market"]))->additional(['status' => 'success']);
+        $filters = $request->all();
+        if (array_key_exists('orderByMarketLocation', $filters)) {
+            $user = Auth::user();
+            if (!($user->lat && $user->lng))
+                unset($filters['orderByMarketLocation']);
+            $filters['orderByMarketLocation'] = [$user->lat, $user->lng];
+        }
+        return OfferResource::collection($this->offerRepo->index(query: $filters, relations: ["category", "market"]))->additional(['status' => 'success']);
     }
 
     public function store(CreateOfferRequest $createOfferRequest)
@@ -43,7 +51,7 @@ class OfferController extends Controller
 
     public function show($id)
     {
-        return ['data'=>new ShowOfferResource($this->offerRepo->show($id)),'status'=>'success'];
+        return ['data' => new ShowOfferResource($this->offerRepo->show($id)), 'status' => 'success'];
     }
 
     public function delete($id)

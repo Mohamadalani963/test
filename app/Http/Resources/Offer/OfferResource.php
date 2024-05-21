@@ -21,13 +21,13 @@ class OfferResource extends JsonResource
         $due_to_date = Carbon::parse($this->due_to);
         $current_date = Carbon::now();
         $creating_date = Carbon::parse($this->created_at);
-        $dicision_value = intval($creating_date->diffInHours($due_to_date)/4);
+        $dicision_value = intval($creating_date->diffInHours($due_to_date) / 4);
         $diff_In_hours_from_creation = $current_date->diffInHours($creating_date);
         $diff_In_hours_from_finishing = $current_date->diffInHours($due_to_date);
         $offer_status = "new";
-        if($diff_In_hours_from_creation > $dicision_value){
+        if ($diff_In_hours_from_creation > $dicision_value) {
             $offer_status = "";
-            if($diff_In_hours_from_finishing <= $dicision_value)
+            if ($diff_In_hours_from_finishing <= $dicision_value)
                 $offer_status = "end_soon";
         }
         return [
@@ -38,9 +38,9 @@ class OfferResource extends JsonResource
             'original_price' => $this->original_price,
             'due_to' => $this->due_to,
             'category_id' => new CategoryResource($this->category),
-            'market_id' => new MarketResource($this->market),
-            'main_image' => $this->main_image ? url('/').'/storage'.substr($this->main_image, 6) : null,
-            'offer_status' =>$offer_status,
+            'market' => new MarketResource($this->market),
+            'main_image' => $this->main_image ? url('/') . '/storage' . substr($this->main_image, 6) : null,
+            'offer_status' => $offer_status,
             'hours_before_expiration' => $current_date->diffInHours($due_to_date)
         ];
     }

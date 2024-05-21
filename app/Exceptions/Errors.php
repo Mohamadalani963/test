@@ -75,4 +75,8 @@ class Errors
     {
         throw new ApiException($message, 'INVALID_COUPON_VALUE', 400, $systemMessage);
     }
+    public static function InvalidOperation($message = "Invalid Operation", $systemMessage = 'Invalid Operation')
+    {
+        throw new ApiException($message, 'INVALID_OPERATION', 400, $systemMessage);
+    }
 }
