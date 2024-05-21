@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\UserController;
 
 use App\Exceptions\Errors;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Favorite\CreateFavoriteRequest;
-use App\Http\Resources\Favorite\FavoriteResource;
+use App\Http\Requests\UserRequests\Favorite\CreateFavoriteRequest;
+use App\Http\Resources\UserResources\Favorite\FavoriteResource;
 use App\Repos\FavoriteRepo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +28,7 @@ class FavoriteController extends Controller
     public function store(CreateFavoriteRequest $createFavoriteRequest)
     {
         $data = $createFavoriteRequest->validated();
-
+        $data['user_id'] = Auth::user()->id;
         return $this->success(new FavoriteResource($this->favoriteRepo->store($data)));
     }
 
@@ -36,7 +36,7 @@ class FavoriteController extends Controller
     {
         $user = Auth::user();
         $record = $this->favoriteRepo->index(['market_id' => $market_id, 'user_id' => $user->id])->first();
-        if (! $record) {
+        if (!$record) {
             Errors::ResourceNotFound();
         }
         $record->delete();

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Favorite;
+namespace App\Http\Requests\UserRequests\Favorite;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +26,7 @@ class CreateFavoriteRequest extends FormRequest
 
         return [
             //
-            'market_id' => "required|unique:favorites,market_id,NULL,id,user_id,{$user->id}",
+            'market_id' => "required|exists:markets,id|unique:favorites,market_id,NULL,id,user_id,{$user->id}",
         ];
     }
 }
