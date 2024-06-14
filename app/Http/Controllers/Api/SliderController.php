@@ -27,14 +27,15 @@ class SliderController extends Controller
     public function store(CreateSliderRequest $createSliderRequest)
     {
         $data = $createSliderRequest->validated();
-        switch ($data['sliderable_type']) {
-            case 'market':
-                $data['sliderable_type'] = Market::class;
-                break;
-            case 'offer':
-                $data['sliderable_type'] = Offer::class;
-                break;
-        }
+        if (array_key_exists('sliderable_type', $data))
+            switch ($data['sliderable_type']) {
+                case 'market':
+                    $data['sliderable_type'] = Market::class;
+                    break;
+                case 'offer':
+                    $data['sliderable_type'] = Offer::class;
+                    break;
+            }
 
         return $this->success(
             $this->sliderRepo->store($data)
