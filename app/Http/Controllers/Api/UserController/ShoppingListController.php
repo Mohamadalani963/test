@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\UserController;
 use App\Exceptions\Errors;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequests\ShoppingListRequest\CreateShoppingListRequest;
+use App\Http\Resources\Offer\OfferResource;
 use App\Http\Resources\UserResources\ShoppingList\ShoppingListResources;
 use App\Repos\ShoppingListRepo;
 use Illuminate\Http\Request;
@@ -20,7 +21,22 @@ class ShoppingListController extends Controller
     //
     public function index(Request $request)
     {
-        return ShoppingListResources::collection($this->shoppingListRepo->index($request->all(), relations: ['user', 'offer']))->additional(['status' => 'success']);
+        $user  = $request->user();
+        $filters = $request->all();
+        if ($user->type == 'guest')
+            $filters['user_id'] = $user->id;
+        $shoppingList = $this->shoppingListRepo->index($filters, paginated: false, relations: ['user', 'offer.category', 'offer.market']);
+        $offers = $shoppingList->map(function ($item) {
+            return $item->offer;
+        });
+        return [
+            'data' => [
+                'total_price_after_offer' => $offers->sum('offer_price'),
+                'total_price_before_offer' => $offers->sum('original_price'),
+                'offers' => OfferResource::collection($offers)
+            ],
+            'status' => 'success'
+        ];
     }
     public function store(CreateShoppingListRequest $request)
     {

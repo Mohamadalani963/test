@@ -22,7 +22,11 @@ class FavoriteController extends Controller
 
     public function index(Request $request)
     {
-        return FavoriteResource::collection($this->favoriteRepo->index(query: $request->all(), relations: ['user', 'market']))->additional(['status' => 'success']);
+        $user  = $request->user();
+        $filters = $request->all();
+        if ($user->type == 'guest')
+            $filters['user_id'] = $user->id;
+        return FavoriteResource::collection($this->favoriteRepo->index(query: $filters, relations: ['user', 'market']))->additional(['status' => 'success']);
     }
 
     public function store(CreateFavoriteRequest $createFavoriteRequest)
