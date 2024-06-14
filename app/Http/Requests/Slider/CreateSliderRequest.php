@@ -24,14 +24,14 @@ class CreateSliderRequest extends FormRequest
         if ($this->sliderable_type == 'market') {
             return [
                 'sliderable_id' => 'required|integer|exists:markets,id',
-                'sliderable_type' => 'required|in:market,offer,other',
+                'sliderable_type' => 'required|in:market,offer',
                 'image' => 'required|file',
             ];
         }
         if ($this->sliderable_type == 'offer') {
             return [
                 'sliderable_id' => 'required|integer|exists:offers,id',
-                'sliderable_type' => 'required|in:market,offer,other',
+                'sliderable_type' => 'required|in:market,offer',
                 'image' => 'required|file',
             ];
         }
