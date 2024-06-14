@@ -35,10 +35,9 @@ class CreateSliderRequest extends FormRequest
                 'image' => 'required|file',
             ];
         }
-
         return [
-            'sliderable_id' => 'required|integer|exists:offers,id',
-            'sliderable_type' => 'required|in:market,offer,other',
+            'sliderable_id' => 'sometimes|integer|exists:offers,id',
+            'sliderable_type' => 'sometimes|in:market,offer,other',
             'image' => 'required|file',
         ];
     }

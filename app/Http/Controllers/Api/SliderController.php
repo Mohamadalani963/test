@@ -21,7 +21,7 @@ class SliderController extends Controller
 
     public function index(Request $request)
     {
-        return SliderResource::collection($this->sliderRepo->index(query: $request->all(),relations:['sliderable']))->additional(['status' => 'success']);
+        return SliderResource::collection($this->sliderRepo->index(query: $request->all(), relations: ['sliderable']))->additional(['status' => 'success']);
     }
 
     public function store(CreateSliderRequest $createSliderRequest)
@@ -34,8 +34,6 @@ class SliderController extends Controller
             case 'offer':
                 $data['sliderable_type'] = Offer::class;
                 break;
-            default:
-                $data['sliderable_type'] = 'other';
         }
 
         return $this->success(
