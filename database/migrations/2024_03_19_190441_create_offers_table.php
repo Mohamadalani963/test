@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('offers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description')->nullable();
+            $table->text('description');
             $table->unsignedBigInteger('offer_price');
             $table->unsignedBigInteger('original_price');
             $table->date('due_to')->nullable();

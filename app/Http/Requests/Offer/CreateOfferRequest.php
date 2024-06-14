@@ -22,7 +22,7 @@ class CreateOfferRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'description' => 'sometimes|string',
+            'description' => 'required|string',
             'name' => 'required|string',
             'offer_price' => 'required|integer',
             'original_price' => 'required|integer',
