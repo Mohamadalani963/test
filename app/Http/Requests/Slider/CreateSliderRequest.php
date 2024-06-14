@@ -37,7 +37,7 @@ class CreateSliderRequest extends FormRequest
         }
         return [
             'sliderable_id' => 'sometimes|integer|exists:offers,id',
-            'sliderable_type' => 'sometimes|in:market,offer,other',
+            'sliderable_type' => 'sometimes|in:market,offer',
             'image' => 'required|file',
         ];
     }
