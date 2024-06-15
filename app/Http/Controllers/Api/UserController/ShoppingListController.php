@@ -45,7 +45,13 @@ class ShoppingListController extends Controller
     {
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
-        return new ShoppingListResources($this->shoppingListRepo->store($data));
+        $shoppingList = $this->shoppingListRepo->store($data);
+        return [
+            'data' => [
+                'offer' => new OfferResource($shoppingList->offer)
+            ],
+            'status' => 'success'
+        ];
     }
     public function delete($id)
     {
