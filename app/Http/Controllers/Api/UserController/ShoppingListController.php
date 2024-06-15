@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequests\ShoppingListRequest\CreateShoppingListRequest;
 use App\Http\Resources\Offer\OfferResource;
 use App\Http\Resources\UserResources\ShoppingList\ShoppingListResources;
+use App\Repos\OfferRepo;
 use App\Repos\ShoppingListRepo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,9 +15,11 @@ use Illuminate\Support\Facades\Auth;
 class ShoppingListController extends Controller
 {
     private ShoppingListRepo $shoppingListRepo;
-    public function __construct(ShoppingListRepo $shoppingListRepo)
+    private OfferRepo $offerRepo;
+    public function __construct(ShoppingListRepo $shoppingListRepo, OfferRepo $offerRepo)
     {
         $this->shoppingListRepo = $shoppingListRepo;
+        $this->offerRepo = $offerRepo;
     }
     //
     public function index(Request $request)
@@ -47,10 +50,18 @@ class ShoppingListController extends Controller
     public function delete($id)
     {
         $user = Auth::user();
-        $shoppingList = $this->shoppingListRepo->show($id);
-        if ($shoppingList->user_id != $user->id)
-            Errors::NotAuthorized();
-        $shoppingList->delete();
+        $offer = $this->offerRepo->show($id);
+        $shoppingList = $offer->ShoppingList->where('user_id', $user->id)->first();
+        if ($shoppingList)
+            $shoppingList->delete();
+        return $this->success();
+    }
+    public function deleteAll(Request $request)
+    {
+        $user = $request->user();
+        $shoppingLists = $user->ShoppingList;
+        foreach ($shoppingLists as $shoppingList)
+            $shoppingList->delete();
         return $this->success();
     }
 }

@@ -28,6 +28,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::prefix('shoppingList')->controller(ShoppingListController::class)->group(function () {
         Route::get('/', 'index');
         Route::post('/', 'store');
+        Route::delete('/all', 'deleteAll');
         Route::delete('/{id}', 'delete');
     });
     Route::prefix('favorite')->controller(FavoriteController::class)->group(function () {
