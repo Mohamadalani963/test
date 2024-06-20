@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\UserResources;
 
+use GPBMetadata\Google\Type\Decimal;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -16,11 +17,11 @@ class SupportMessageResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'title' => $this->title,
-            'message' => $this->message,
+            'name' => $this->name,
+            'description' => $this->description,
             'user_id' => $this->user_id,
-            'contact_email' => $this->contact_email,
-            'file' => $this->file ? url('/').'/storage'.substr($this->file, 6) : null,
+            'phone_number' => $this->phone_number,
+            'file' => $this->file ? url('/') . '/storage' . substr($this->file, 6) : null,
         ];
     }
 }

@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('support_messages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('contact_email');
-            $table->string('message');
-            $table->string('title');
+            $table->string('name');
+            $table->string('phone_number');
+            $table->string('description');
             $table->string('file')->nullable();
-            $table->enum('status',['reviewed','notReviewed'])->default('notReviewed');
+            $table->enum('status', ['reviewed', 'notReviewed'])->default('notReviewed');
             $table->timestamps();
         });
     }

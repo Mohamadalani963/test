@@ -17,11 +17,11 @@ class SupportMessageResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'title' => $this->title,
-            'message' => $this->message,
+            'name' => $this->name,
+            'description' => $this->description,
+            'phone_number' => $this->phone_number,
             'user' => new UserResource($this->user),
-            'contact_email' => $this->contact_email,
-            'file' => $this->file ? url('/').'/storage'.substr($this->file, 6) : null,
+            'file' => $this->file ? url('/') . '/storage' . substr($this->file, 6) : null,
             'status' => $this->status
         ];
     }

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 class SupportMessage extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id','message','contact_email','title','file','status'];
+    protected $fillable = ['user_id', 'name', 'phone_number', 'description', 'file', 'status'];
 
     protected static function boot()
     {
@@ -28,7 +28,8 @@ class SupportMessage extends Model
     }
 
     //@relations
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 }

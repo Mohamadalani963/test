@@ -3,6 +3,7 @@
 namespace App\Http\Requests\UserRequests\SupportMessageRequests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Ramsey\Uuid\Type\Decimal;
 
 class CreateSupportMessageRequest extends FormRequest
 {
@@ -22,9 +23,9 @@ class CreateSupportMessageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'message' => 'required|string',
-            'contact_email' => "required|email",
-            'title' => "required|string",
+            'name' => 'required|string',
+            'phone_number' => "required|string|min:9",
+            'description' => "required|string",
             'file' => "sometimes|file",
         ];
     }
