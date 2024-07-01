@@ -70,7 +70,21 @@ class ShoppingListController extends Controller
         $shoppingList = $offer->ShoppingList->where('user_id', $user->id)->first();
         if ($shoppingList)
             $shoppingList->delete();
-        return $this->success();
+        $filters = [];
+        if ($user->type == 'guest')
+            $filters['user_id'] = $user->id;
+        $shoppingList = $this->shoppingListRepo->index($filters, paginated: false, relations: ['user', 'offer.category', 'offer.market']);
+        $offers = $shoppingList->map(function ($item) {
+            return $item->offer;
+        });
+        return [
+            'data' => [
+                'total_price_after_offer' => $offers->sum('offer_price'),
+                'total_price_before_offer' => $offers->sum('original_price'),
+                'offers' => OfferResource::collection($offers)
+            ],
+            'status' => 'success'
+        ];
     }
     public function deleteAll(Request $request)
     {
