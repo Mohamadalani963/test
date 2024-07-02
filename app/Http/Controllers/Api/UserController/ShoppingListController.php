@@ -92,6 +92,13 @@ class ShoppingListController extends Controller
         $shoppingLists = $user->ShoppingList;
         foreach ($shoppingLists as $shoppingList)
             $shoppingList->delete();
-        return $this->success();
+        return [
+            'data' => [
+                'total_price_after_offer' => 0,
+                'total_price_before_offer' => 0,
+                'offers' => []
+            ],
+            'status' => 'success'
+        ];
     }
 }
