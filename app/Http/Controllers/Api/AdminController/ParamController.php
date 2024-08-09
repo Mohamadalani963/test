@@ -46,10 +46,10 @@ class ParamController extends Controller
         $this->paramRepo->store($data);
         return $this->success();
     }
-    public function update($id, UpdateParamRequest $updateParamRequest)
+    public function update($name, UpdateParamRequest $updateParamRequest)
     {
         $data =  $updateParamRequest->validated();
-        $this->paramRepo->update($id, $data);
+        $this->paramRepo->update($name, $data);
         return $this->success();
     }
     public function delete($id)
