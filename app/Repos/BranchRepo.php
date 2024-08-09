@@ -14,6 +14,7 @@ class BranchRepo extends CrudRepository
     protected $filters = [
         'name' => 'equal',
         'id' => 'equal',
+        'market_id' => 'equal'
     ];
 
     public function store($data, $attr = null)

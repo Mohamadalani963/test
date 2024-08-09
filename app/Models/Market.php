@@ -35,4 +35,8 @@ class Market extends Model
     {
         return $this->hasMany(Branch::class);
     }
+    public function owners()
+    {
+        return $this->belongsToMany(User::class, 'market_owners', 'market_id');
+    }
 }

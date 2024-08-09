@@ -20,10 +20,10 @@ Route::prefix('admin')->middleware(['auth:sanctum'])->group(function () {
         Route::put('/{id}', 'update')->middleware('ability:contactUs::update');
         Route::delete('/{id}', 'delete')->middleware('ability:contactUs::delete');
     });
-    Route::prefix('param')->controller(ParamController::class)->group(function(){
-        Route::get('/','index')->middleware('ability:param::index');
-        Route::post('/','store')->middleware('ability:param::store');
-        Route::put('/{id}','update')->middleware('ability:param::update');
-        Route::delete('/{id}','delete')->middleware('ability:param::delete');
+    Route::prefix('param')->controller(ParamController::class)->group(function () {
+        Route::get('/', 'index')->middleware('ability:param::index');
+        Route::post('/', 'store')->middleware('ability:param::store');
+        Route::put('/{name}', 'update')->middleware('ability:param::update');
+        Route::delete('/{id}', 'delete')->middleware('ability:param::delete');
     });
 });

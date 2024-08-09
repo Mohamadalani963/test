@@ -11,7 +11,6 @@ class BranchOffer extends Pivot
 
     protected $fillable = ['branch_id', 'offer_id'];
 
-    //TODO Relations
     public function offer()
     {
         return $this->belongsTo(Offer::class);
