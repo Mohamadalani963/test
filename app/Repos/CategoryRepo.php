@@ -40,7 +40,7 @@ class CategoryRepo extends CrudRepository
     public function delete($id, $attr = null)
     {
         $category = $this->findOrFail($id);
-        if ($category->offers) {
+        if ($category->offers->count() > 0) {
             Errors::RelatedResourceExisted('Category have related offers delete those offers and Try Again', 'Category have related offers delete those offers and Try Again');
         }
         $category->delete();
