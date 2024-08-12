@@ -23,9 +23,9 @@ class CreateDistrictRequest extends FormRequest
     {
         return [
             'name' => "required|string|unique:districts,name,NULL,id,city,{$this->city}",
-            'lat' => 'required|decimal:2',
-            'lng' => 'required|decimal:2',
-            'city' => ['required', 'in:Damascus,Aleepo,Lattakia,Tartus,Daraa,Sweida,Homs,Deir Al Zor,Al Raqqa,Al Qamishli,Hama,Idlib'],
+            'lat' => 'required|decimal:4',
+            'lng' => 'required|decimal:4',
+            'city' => ['required', 'in:Damascus,Aleepo,Lattakia,Tartus,Daraa,Sweida,Homs,Deir Al Zor,Al Raqqa,Al Qamishli,Hama,Idlib,Rif Dimshq'],
             'status' => 'sometimes|in:active,inActive',
         ];
     }

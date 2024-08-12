@@ -36,9 +36,9 @@ class UpdateDistrictRequest extends FormRequest
         return [
             //
             'name' => "sometimes|string|unique:districts,name,NULL,id,city,{$city}",
-            'lat' => 'sometimes|decimal:2',
-            'lng' => 'sometimes|decimal:2',
-            'city' => ['sometimes', 'in:Damascus,Aleepo,Lattakia,Tartus,Daraa,Sweida,Homs,Deir Al Zor,Al Raqqa,Al Qamishli,Hama,Idlib'],
+            'lat' => 'sometimes|decimal:4',
+            'lng' => 'sometimes|decimal:4',
+            'city' => ['sometimes', 'in:Damascus,Aleepo,Lattakia,Tartus,Daraa,Sweida,Homs,Deir Al Zor,Al Raqqa,Al Qamishli,Hama,Idlib,Rif Dimshq'],
             'status' => 'sometimes|in:active,inActive',
 
         ];

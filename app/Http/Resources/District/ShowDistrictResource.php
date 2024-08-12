@@ -19,7 +19,7 @@ class ShowDistrictResource extends JsonResource
 
         return [
             'id' => $this->id,
-            'name' => $this->name, //TODO Return Market Object Here
+            'name' => $this->name,
             'city' => $this->city,
             'lng' => $this->lng,
             'lat' => $this->lat,
