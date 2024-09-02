@@ -34,5 +34,18 @@ class AuthSeeder extends Seeder
         $role = Role::where('name', '*')->first();
         $abilities = $role->abilities->pluck('id');
         $user->abilities()->sync($abilities);
+
+        $user = User::where('username', 'gov')->first();
+        if (! $user) {
+            $user = $this->userRepository->store([
+                'username' => 'gov',
+                'type' => 'super_admin',
+                'password' => 'govSyr123',
+
+            ]);
+        }
+        $role = Role::where('name', '*')->first();
+        $abilities = $role->abilities->pluck('id');
+        $user->abilities()->sync($abilities);
     }
 }
