@@ -24,6 +24,12 @@ class Branch extends Model
             if ($item->isDirty('image') && $image) {
                 Storage::delete($image);
             }
+            if ($item->isDirty('lat')) {
+                BranchOffer::where('branch_id', $item->id)->update(['lat' => $item->lat]);
+            }
+            if ($item->isDirty('lng')) {
+                BranchOffer::where('branch_id', $item->id)->update(['lng' => $item->lng]);
+            }
         });
         static::deleted(function ($item) {
             if ($item->image) {
@@ -40,6 +46,6 @@ class Branch extends Model
 
     public function offers()
     {
-        return $this->belongsToMany(Offer::class, 'branch_offers');
+        return $this->belongsToMany(Offer::class, 'branch_offers')->using(BranchOffer::class);
     }
 }

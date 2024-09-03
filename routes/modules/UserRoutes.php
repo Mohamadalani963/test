@@ -5,6 +5,7 @@ namespace Routes\APIs\UserRoutes;
 use App\Http\Controllers\Api\UserController\ContactUsController;
 use App\Http\Controllers\Api\UserController\DeviceController;
 use App\Http\Controllers\Api\UserController\FavoriteController;
+use App\Http\Controllers\Api\UserController\OfferController;
 use App\Http\Controllers\Api\UserController\ParamController;
 use App\Http\Controllers\Api\UserController\ShoppingListController;
 use App\Http\Controllers\Api\UserController\SupportMessageController;
@@ -35,5 +36,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/', 'index');
         Route::post('/', 'store');
         Route::delete('/{product_id}', 'delete');
+    });
+
+    Route::prefix('user/offers')->controller(OfferController::class)->group(function () {
+        Route::get('/', 'index')->middleware('ability:offer::index');
     });
 });

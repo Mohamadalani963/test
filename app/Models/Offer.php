@@ -46,7 +46,7 @@ class Offer extends Model
 
     public function branches()
     {
-        return $this->belongsToMany(Branch::class, 'branch_offers');
+        return $this->belongsToMany(Branch::class, 'branch_offers')->using(BranchOffer::class);
     }
     public function ShoppingList()
     {
