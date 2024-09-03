@@ -30,6 +30,9 @@ class ShowOfferResource extends JsonResource
             if ($diff_In_hours_from_finishing <= $dicision_value)
                 $offer_status = "ينتهي قريباً";
         }
+        if ($diff_In_hours_from_finishing <= 0) {
+            $offer_status = "منتهي";
+        }
         return [
             'id' => $this->id,
             'description' => $this->description,

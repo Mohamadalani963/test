@@ -24,11 +24,15 @@ class OfferResource extends JsonResource
         $dicision_value = intval($creating_date->diffInHours($due_to_date) / 4);
         $diff_In_hours_from_creation = $current_date->diffInHours($creating_date);
         $diff_In_hours_from_finishing = $current_date->diffInHours($due_to_date);
+        //TODO check this
         $offer_status = "جديد";
         if ($diff_In_hours_from_creation > $dicision_value) {
             $offer_status = "";
             if ($diff_In_hours_from_finishing <= $dicision_value)
                 $offer_status = "ينتهي قريباً";
+        }
+        if ($diff_In_hours_from_finishing <= 0) {
+            $offer_status = "منتهي";
         }
         return [
             'id' => $this->id,
