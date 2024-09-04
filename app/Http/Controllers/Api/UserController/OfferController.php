@@ -49,12 +49,11 @@ class OfferController extends Controller
 
         // If location ordering is needed, calculate the distance and add it to the query
         if ($orderedByLocation) {
-            $haversine = "(6371 * acos(cos(radians($lat)) * cos(radians(branches.lat)) * cos(radians(branches.lng) - radians($lng)) + sin(radians($lat)) * sin(radians(branches.lat)))) AS distance";
+            $haversine = "(6371 * acos(cos(radians($lat)) * cos(radians(branch_offers.lat)) * cos(radians(branch_offers.lng) - radians($lng)) + sin(radians($lat)) * sin(radians(branch_offers.lat)))) AS distance";
 
             // Include the Haversine calculation in the select clause and order by distance
             $query->selectRaw("*, $haversine")->orderBy('distance');
         }
-
         // Execute the query and return the results with the status
         return OfferResource::collection($query->paginate())->additional(['status' => 'success']);
     }
