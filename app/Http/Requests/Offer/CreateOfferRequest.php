@@ -26,7 +26,7 @@ class CreateOfferRequest extends FormRequest
             'name' => 'required|string',
             'offer_price' => 'required|integer',
             'original_price' => 'required|integer',
-            'due_to' => 'sometimes|date',
+            'due_to' => 'required|date',
             'category_id' => 'required|exists:categories,id',
             'market_id' => 'required|exists:markets,id',
             'main_image' => 'sometimes|image',
