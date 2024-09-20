@@ -27,10 +27,12 @@ class OwnersRelationManager extends RelationManager
         return $form
             ->schema([
                 Forms\Components\TextInput::make('username') // Pivot field
-                    // ->unique(table: 'users', column: 'username', ignorable: fn($record) => $record ? $record->user->id : null) // Ignore current user's ID on edit                  ->required()
-                    ->disabledOn('edit'),
+                    ->disabledOn('edit')->rules(function()use($form){
+                        if($form->getOperation()!='edit')
+                            return ['unique:users,username'];
+                    }),
                 Forms\Components\TextInput::make('password') // Pivot field
-                    ->required()
+                    ->required($form->getOperation() != "edit")
                     ->password()
                     ->confirmed(),
                 Forms\Components\TextInput::make('password_confirmation') // Password confirmation field
@@ -38,15 +40,15 @@ class OwnersRelationManager extends RelationManager
                     ->requiredWith('password'), // Ensures it's required only when password is provided
                 Forms\Components\TextInput::make('first_name') // Pivot field
                     ->string()
-                    ->required(),
+                    ->required($form->getOperation() == "edit"),
                 Forms\Components\TextInput::make('last_name') // Pivot field
                     ->string()
-                    ->required(),
+                    ->required($form->getOperation() == "edit"),
                 Forms\Components\TextInput::make('phone_number') // Pivot field
                     ->string()
-                    ->required(),
+                    ->required($form->getOperation() == "edit"),
                 Forms\Components\TextInput::make('id_number') // Pivot field
-                    ->required(),
+                    ->required($form->getOperation() == "edit"),
             ]);
     }
 

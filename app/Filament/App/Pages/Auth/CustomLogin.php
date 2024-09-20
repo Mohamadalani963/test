@@ -21,9 +21,8 @@ class CustomLogin extends Login
         if (app()->environment('local')) {
             $this->form->fill([
                 'username' => 'admin',
-                'password' => 'password',
+                'password' => '',
             ]);
-            error_log('test');
         }
     }
 
