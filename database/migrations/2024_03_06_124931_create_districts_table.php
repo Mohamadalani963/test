@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->enum('city', ['Damascus', 'Aleepo', 'Lattakia', 'Tartus', 'Daraa', 'Sweida', 'Homs', 'Deir Al Zor', 'Al Raqqa', 'Al Qamishli', 'Hama', 'Idlib', 'Rif Dimshq']);
-            $table->enum('status', ['active', 'inActive'])->default('active');
+            $table->boolean('status')->default(true);
             $table->double('lat')->nullable();
             $table->double('lng')->nullable();
             $table->unique(['name', 'city']);

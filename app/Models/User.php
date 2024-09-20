@@ -3,13 +3,16 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasName;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasName, FilamentUser
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -36,7 +39,10 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
+    public function canAccessPanel(\Filament\Panel $panel): bool
+    {
+        return $this->type == 'super_admin';
+    }
     protected static function booted()
     {
         parent::booted();
@@ -53,6 +59,10 @@ class User extends Authenticatable
             }
         });
     }
+    public function getFilamentName(): string
+    {
+        return $this->username;
+    }
 
     public function abilities()
     {
@@ -66,5 +76,9 @@ class User extends Authenticatable
     public function ShoppingList()
     {
         return $this->hasMany(ShoppingList::class);
+    }
+    public function owner()
+    {
+        return $this->hasOne(MarketOwner::class);
     }
 }

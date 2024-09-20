@@ -92,4 +92,12 @@ Route::middleware('auth:sanctum')->group(function () {
     //TODO Filters Base on mobile Application needs
     //TODO check deleting high level entities
     //TODO unit test
+
+
+    //TODO code need some refactor:
+    //seperate controllers for mobile and admin
+    //work on the dashboard
+
+    //TODO Action Watcher
+
 });

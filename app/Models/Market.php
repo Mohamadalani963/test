@@ -37,6 +37,6 @@ class Market extends Model
     }
     public function owners()
     {
-        return $this->belongsToMany(User::class, 'market_owners', 'market_id');
+        return $this->hasMany(MarketOwner::class);
     }
 }
