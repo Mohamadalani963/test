@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
+include(__DIR__ . '/modules/MarketOwnerRoutes.php');
 include(__DIR__ . '/modules/AdminRoutes.php');
 include(__DIR__ . '/modules/UserRoutes.php');
 

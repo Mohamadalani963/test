@@ -2,6 +2,7 @@
 
 namespace App\Repos;
 
+use App\Exceptions\ApiException;
 use App\Models\MarketOwner;
 
 class MarketOwnerRepo extends CrudRepository
@@ -21,16 +22,10 @@ class MarketOwnerRepo extends CrudRepository
 
     public function store($data, $attr = null)
     {
-        return $this->transaction(
-            function () use ($data) {
-                $user = $this->userRepo->store($data);
-                $data['user_id'] = $user->id;
-
-                return parent::store($data);
-            },
-            function ($e) {
-                throw $e;
-            }
-        );
+       
+        $user = $this->userRepo->store($data);
+        $data['user_id'] = $user->id;
+        return parent::store($data);
+            
     }
 }

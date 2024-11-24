@@ -70,6 +70,10 @@ class Errors
     {
         throw new ApiException($message, 'INVALID_COUPON', 400, $systemMessage);
     }
+    public static function InvalidCode($message = 'Invalid Code', $systemMessage = 'Invalid Code')
+    {
+        throw new ApiException($message, 'INVALID_CODE', 400, $systemMessage);
+    }
 
     public static function InvalidCouponValue($message = 'Invalid Coupon Value', $systemMessage = 'Invalid Coupon Value')
     {

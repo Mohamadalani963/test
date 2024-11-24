@@ -26,11 +26,12 @@ class MarketRepo extends CrudRepository
             $data['image'] = $data['image']->store('public/markets');
         }
         $item = parent::store($data);
-        $password = RandomizationUtils::randomPassword(8);
+        $password = array_key_exists('password',$data)?$data['password']:RandomizationUtils::randomPassword(8);
         $data['owner']['password'] = $password;
         $data['owner']['username'] = $data['name'].$item->id;
         $data['owner']['type'] = 'marketOwner';
         $data['owner']['market_id'] = $item->id;
+        $data['owner']['phone_number'] = $data['phone_number'];
         $this->marketOwnerRepo->store($data['owner']);
 
         return ['market' => $item, 'marketOwner' => ['username' => $data['owner']['username'], 'password' => $password]];

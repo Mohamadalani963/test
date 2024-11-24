@@ -23,7 +23,6 @@ class CrudRepository extends BaseRepository
     public function store($data, $attr = null)
     {
         $record = $this->model::create($data);
-
         return $record;
     }
 

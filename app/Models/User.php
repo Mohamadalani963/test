@@ -3,7 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-
+use Carbon\Carbon;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasName;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -27,6 +27,9 @@ class User extends Authenticatable implements HasName, FilamentUser
         'password',
         'lat',
         'lng',
+        'phone_number',
+        'status',
+        'verification_code'
     ];
 
     // lat and lng are used to determine the nearest offers to the user
@@ -51,6 +54,9 @@ class User extends Authenticatable implements HasName, FilamentUser
             if ($user->type != 'guest') {
                 $user->password = Hash::make($user->password);
             }
+            if($user->type == "marketOwner"){
+                $user->generateVerifyCode();
+            }
         });
 
         static::updating(function ($user) {
@@ -62,6 +68,11 @@ class User extends Authenticatable implements HasName, FilamentUser
     public function getFilamentName(): string
     {
         return $this->username;
+    }
+    public function generateVerifyCode()
+    {
+        $this->verification_code = substr(str_shuffle(str_repeat($x = '0123456789', ceil(4 / strlen($x)))), 1, 4);
+        $this->verification_code = '0000';
     }
 
     public function abilities()
